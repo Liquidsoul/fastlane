@@ -34,6 +34,15 @@ describe Fastlane do
           expect(lanes[nil][:test].description).to eq([])
           expect(lanes[:ios][:crashy].description).to eq(["This action does nothing", "but crash"])
           expect(lanes[:ios][:empty].description).to eq([])
+          expect(ENV["FASTLANE_LANE_NAME"]).to eq("empty")
+          expect(ENV["FASTLANE_PLATFORM_NAME"]).to eq("ios")
+        end
+
+        it "Allows access to root lane despite default platform" do
+          ff = Fastlane::LaneManager.cruise_lane(nil, 'test')
+          lanes = ff.runner.lanes
+          expect(ENV["FASTLANE_PLATFORM_NAME"]).to eq(nil)
+          expect(ENV["FASTLANE_LANE_NAME"]).to eq("test")
         end
       end
     end
