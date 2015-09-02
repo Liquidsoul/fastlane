@@ -18,7 +18,7 @@ module Fastlane
       Helper.log.info ['[SHELL COMMAND]', command.yellow].join(': ') if log
 
       result = ''
-      if Helper.test?
+      if false#Helper.test?
         result << command # only for the tests
       else
         begin
